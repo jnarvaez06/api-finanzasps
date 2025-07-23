@@ -1,4 +1,4 @@
-package com.jn.api_gastos.user.dto;
+package com.jn.api_gastos.modules.user.dto;
 
 public record UserDTO(
         Integer idUser,

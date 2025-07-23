@@ -1,8 +1,8 @@
 package com.jn.api_gastos.auth;
 
 import com.jn.api_gastos.jwt.JwtService;
-import com.jn.api_gastos.user.model.User;
-import com.jn.api_gastos.user.repository.UserRepository;
+import com.jn.api_gastos.modules.user.model.User;
+import com.jn.api_gastos.modules.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -42,5 +42,19 @@ public class AuthService {
         return AuthResponse.builder()
                 .token(jwtService.getToken(user))
                 .build();
+    }
+
+    public boolean validateToken (String token) {
+        String username = jwtService.getUsernameFromToken(token);
+        if (username == null) {
+            return false;
+        }
+
+        UserDetails userDetails = userRepository.findByUsername(username).orElse(null);
+        if (userDetails == null) {
+            return false;
+        }
+
+        return jwtService.isTokenValid(token, userDetails);
     }
 }

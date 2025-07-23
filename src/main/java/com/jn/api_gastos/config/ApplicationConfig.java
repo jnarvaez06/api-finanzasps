@@ -1,6 +1,6 @@
 package com.jn.api_gastos.config;
 
-import com.jn.api_gastos.user.repository.UserRepository;
+import com.jn.api_gastos.modules.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

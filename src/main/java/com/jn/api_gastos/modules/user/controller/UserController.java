@@ -1,15 +1,15 @@
-package com.jn.api_gastos.user.controller;
+package com.jn.api_gastos.modules.user.controller;
 
-import com.jn.api_gastos.user.dto.UserDTO;
-import com.jn.api_gastos.user.model.User;
-import com.jn.api_gastos.user.service.IUserService;
+import com.jn.api_gastos.modules.user.dto.UserDTO;
+import com.jn.api_gastos.modules.user.model.User;
+import com.jn.api_gastos.modules.user.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("finanzasps")
+@RequestMapping("${api.base.path}")
 @CrossOrigin(value="http://localhost:5173")
 public class UserController {
 

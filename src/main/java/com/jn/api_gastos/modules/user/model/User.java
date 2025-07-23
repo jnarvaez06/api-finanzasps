@@ -1,4 +1,4 @@
-package com.jn.api_gastos.user.model;
+package com.jn.api_gastos.modules.user.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

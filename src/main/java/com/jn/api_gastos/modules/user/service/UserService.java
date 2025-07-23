@@ -1,8 +1,8 @@
-package com.jn.api_gastos.user.service;
+package com.jn.api_gastos.modules.user.service;
 
-import com.jn.api_gastos.user.dto.UserDTO;
-import com.jn.api_gastos.user.model.User;
-import com.jn.api_gastos.user.repository.UserRepository;
+import com.jn.api_gastos.modules.user.dto.UserDTO;
+import com.jn.api_gastos.modules.user.model.User;
+import com.jn.api_gastos.modules.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

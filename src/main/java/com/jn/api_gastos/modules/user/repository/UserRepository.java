@@ -1,6 +1,6 @@
-package com.jn.api_gastos.user.repository;
+package com.jn.api_gastos.modules.user.repository;
 
-import com.jn.api_gastos.user.model.User;
+import com.jn.api_gastos.modules.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
