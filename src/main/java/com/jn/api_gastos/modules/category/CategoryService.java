@@ -1,10 +1,11 @@
 package com.jn.api_gastos.modules.category;
 
-import com.jn.api_gastos.modules.user.repository.UserRepository;
+import com.jn.api_gastos.auth.AuthenticatedUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryService implements ICategoryService{
@@ -12,12 +13,18 @@ public class CategoryService implements ICategoryService{
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private AuthenticatedUser authenticatedUser;
+
     @Override
     public List<CategoryDTO> listCategories() {
-        return categoryRepository.findAll().stream().
+        String username = authenticatedUser.getUsername();
+
+        return categoryRepository.findAllByUser(username).stream().
                 map(category -> new CategoryDTO(
                         category.getIdCategory(),
-                        category.getDescription()
+                        category.getDescription(),
+                        category.isState()
                 ))
                 .toList();
     }
@@ -25,5 +32,10 @@ public class CategoryService implements ICategoryService{
     @Override
     public Category saveCategory(Category category) {
         return categoryRepository.save(category);
+    }
+
+    @Override
+    public Category getCategoryById(Integer idCategory) {
+        return categoryRepository.findById(idCategory).orElse(null);
     }
 }

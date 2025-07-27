@@ -7,4 +7,6 @@ public interface ICategoryService {
     public List<CategoryDTO> listCategories();
 
     public Category saveCategory(Category category);
+
+    public Category getCategoryById(Integer idCategory);
 }
