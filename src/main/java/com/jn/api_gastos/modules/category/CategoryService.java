@@ -37,4 +37,17 @@ public class CategoryService implements ICategoryService{
     public Category getCategoryById(Integer idCategory) {
         return categoryRepository.findById(idCategory).orElse(null);
     }
+
+    @Override
+    public List<CategoryDTO> getCategoriesActive() {
+        String username = authenticatedUser.getUsername();
+
+        return categoryRepository.findAllByUserAndStateTrue(username).stream().
+                map(category -> new CategoryDTO(
+                        category.getIdCategory(),
+                        category.getDescription(),
+                        category.isState()
+                ))
+                .toList();
+    }
 }

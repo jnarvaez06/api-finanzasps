@@ -54,4 +54,16 @@ public class CategoryController {
         return ResponseEntity.ok(category);
     }
 
+    @GetMapping(value = "/categorySelect")
+    public ResponseEntity<List<CategoryDTO>> getCategoriesSelect() {
+
+        List<CategoryDTO> categories = categoryService.getCategoriesActive();
+
+        if (categories == null || categories.isEmpty()) {
+            throw new ResourceNotFoundException("Categories");
+        }
+
+        return ResponseEntity.ok(categories);
+    }
+
 }

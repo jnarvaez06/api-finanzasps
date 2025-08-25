@@ -9,4 +9,6 @@ public interface ICategoryService {
     public Category saveCategory(Category category);
 
     public Category getCategoryById(Integer idCategory);
+
+    public List<CategoryDTO> getCategoriesActive();
 }
