@@ -51,4 +51,15 @@ public class AccountController {
 
         return ResponseEntity.ok(account);
     }
+
+    @GetMapping(value = "/accountSelect")
+    public ResponseEntity<List<AccountDTO>> getAccountSelect() {
+        List<AccountDTO> accounts = accountService.getAccountsActive();
+
+        if (accounts == null || accounts.isEmpty()) {
+            throw new ResourceNotFoundException("AccountsSelect");
+        }
+
+        return ResponseEntity.ok(accounts);
+    }
 }

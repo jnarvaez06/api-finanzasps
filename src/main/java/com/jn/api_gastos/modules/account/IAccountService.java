@@ -8,4 +8,6 @@ public interface IAccountService {
     public Account saveAccount(Account account);
 
     public Account getAccountById(Integer idAccount);
+
+    public List<AccountDTO> getAccountsActive();
 }

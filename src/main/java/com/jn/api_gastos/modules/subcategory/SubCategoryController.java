@@ -33,7 +33,6 @@ public class SubCategoryController {
 
     @PostMapping(value = NAME_ENDPOINT)
     public ResponseEntity<SubCategory> addSubCategory(@Valid @RequestBody SubCategoryRequestDTO requestDTO) {
-        System.out.println("recibo" + requestDTO);
         SubCategory saved = subCategoryService.saveSubCategory(requestDTO);
         return ResponseEntity.ok(saved);
     }

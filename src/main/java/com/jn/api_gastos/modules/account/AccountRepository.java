@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface AccountRepository extends JpaRepository<Account, Integer> {
     List<Account> findAllByUser(String user);
+
+    List<Account> findAllByUserAndStateTrue(String user);
 }

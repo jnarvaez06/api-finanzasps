@@ -38,4 +38,18 @@ public class AccountService implements IAccountService{
     public Account getAccountById(Integer idAccount) {
         return accountRepository.findById(idAccount).orElse(null);
     }
+
+    @Override
+    public List<AccountDTO> getAccountsActive() {
+        String username = authenticatedUser.getUsername();
+
+        return accountRepository.findAllByUserAndStateTrue(username)
+                .stream()
+                .map(account -> new AccountDTO(
+                        account.getIdAccount(),
+                        account.getDescription(),
+                        account.isState()
+                ))
+                .toList();
+    }
 }
