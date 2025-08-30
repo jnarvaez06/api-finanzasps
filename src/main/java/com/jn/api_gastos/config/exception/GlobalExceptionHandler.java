@@ -40,7 +40,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleGeneralException(Exception ex) {
-        System.out.println("ES esta otra exception");
+        System.out.println("ES esta otra exception 1");
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(
                 "status", 500,
                 "message", "Internal Server Error",
@@ -50,7 +50,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(CustomMessageException.class)
     public ResponseEntity<?> handleCustomGeneralException(Exception ex, String message) {
-        System.out.println("ES esta exception");
+        System.out.println("ES esta exception 2");
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(
                 "status", 500,
                 "message", message,

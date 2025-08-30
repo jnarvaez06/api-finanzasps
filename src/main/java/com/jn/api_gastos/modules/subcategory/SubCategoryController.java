@@ -36,4 +36,15 @@ public class SubCategoryController {
         SubCategory saved = subCategoryService.saveSubCategory(requestDTO);
         return ResponseEntity.ok(saved);
     }
+
+    @GetMapping(value = "/subcategorySelect")
+    public ResponseEntity<List<SubCategoryDTO>> getSubCategoriesSelect() {
+        List<SubCategoryDTO> subcategories = subCategoryService.getSubCategoryActive();
+
+        if (subcategories == null || subcategories.isEmpty()) {
+            throw new ResourceNotFoundException("SubCategories");
+        }
+
+        return ResponseEntity.ok(subcategories);
+    }
 }

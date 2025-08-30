@@ -17,6 +17,7 @@ import java.util.List;
 @RequestMapping("${api.base.path}")
 @RequiredArgsConstructor
 public class MovementController {
+
     private static final String NAME_ENDPOINT = "/movement";
     private static final String NAME_ENDPOINT_ID = "/movement/{id}";
 
@@ -36,6 +37,7 @@ public class MovementController {
 
     @PostMapping(value = NAME_ENDPOINT)
     public ResponseEntity<Movement> addMovement(@Valid @RequestBody MovementRequestDTO requestDTO) {
+        System.out.println("Hasta ahora " + requestDTO);
         Movement saved = movementService.saveMovement(requestDTO);
         return ResponseEntity.ok(saved);
     }

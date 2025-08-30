@@ -8,6 +8,7 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -38,8 +39,8 @@ public class Movement {
     private LocalDate dateMovement;
 
     @Column(nullable = false)
-    @DecimalMin(value = "0,01", message = "Value must be greater than 0")
-    private float value;
+    @DecimalMin(value = "0.01", message = "Value must be greater than 0")
+    private BigDecimal value;
 
     @ManyToOne
     @JoinColumn(name = "id_category", referencedColumnName = "idCategory")

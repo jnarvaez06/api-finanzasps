@@ -9,4 +9,6 @@ public interface ISubCategoryService {
     public SubCategory saveSubCategory(SubCategoryRequestDTO subCategory);
 
     public SubCategory getSubCategoryById(Integer idSubCategory);
+
+    public List<SubCategoryDTO> getSubCategoryActive();
 }

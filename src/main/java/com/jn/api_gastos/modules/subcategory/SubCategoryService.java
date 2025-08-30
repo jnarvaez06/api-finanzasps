@@ -59,4 +59,19 @@ public class SubCategoryService implements ISubCategoryService{
     public SubCategory getSubCategoryById(Integer idSubCategory) {
         return subCategoryRepository.findById(idSubCategory).orElse(null);
     }
+
+    @Override
+    public List<SubCategoryDTO> getSubCategoryActive() {
+        String username = authenticatedUser.getUsername();
+
+        return subCategoryRepository.findAllByUserAndStateTrue(username)
+                .stream()
+                .map(subCategory ->new SubCategoryDTO(
+                        subCategory.getIdSubCategory(),
+                        subCategory.getDescription(),
+                        subCategory.getCategory(),
+                        subCategory.isState()
+                ))
+                .toList();
+    }
 }

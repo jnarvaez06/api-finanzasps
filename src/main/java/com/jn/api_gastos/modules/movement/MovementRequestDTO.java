@@ -21,7 +21,7 @@ public class MovementRequestDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateMovement;
 
-    @DecimalMin(value = "0,01", message = "Value must be greater than 0")
+    @DecimalMin(value = "0.01", message = "Value must be greater than 0")
     private float value;
 
     @NotNull
