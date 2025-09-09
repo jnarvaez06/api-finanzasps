@@ -8,6 +8,8 @@ import java.time.LocalDate;
 
 @Data
 public class MovementRequestDTO {
+    private Long idMovement;
+
     @NotBlank
     private String description;
 

@@ -49,43 +49,40 @@ public class MovementService implements IMovementService{
 
     @Override
     public Movement saveMovement(MovementRequestDTO movementRequest) {
+        Movement movement;
 
-        Account account = accountRepository.findById(movementRequest.getIdAccount())
-                .orElse(null);
-        System.out.println("account "+account);
-        if (account == null) {
-            throw new ResourceNotFoundException("Account", "idAccount", movementRequest.getIdAccount());
+        if (movementRequest.getIdMovement() != null) {
+            movement = movementRepository.findById(movementRequest.getIdMovement().intValue())
+                    .orElseThrow(() -> new ResourceNotFoundException("Movement", "idMovement", movementRequest.getIdMovement()));
+        } else {
+            movement = new Movement();
         }
 
-        Category category = categoryRepository.findById(movementRequest.getIdCategory())
-                .orElse(null);
-        System.out.println("category "+category);
-        if (category == null) {
-            throw new ResourceNotFoundException("Category", "idCategory", movementRequest.getIdCategory());
+        movement.setAccount(accountRepository.findById(movementRequest.getIdAccount())
+                .orElseThrow(() -> new ResourceNotFoundException("Account", "idAccount", movementRequest.getIdAccount())));
+
+        movement.setCategory(categoryRepository.findById(movementRequest.getIdCategory())
+                .orElseThrow(() -> new ResourceNotFoundException("Category", "idCategory", movementRequest.getIdCategory())));
+
+        if (movementRequest.getIdSubCategory() != null) {
+            movement.setSubCategory(subCategoryRepository.findById(movementRequest.getIdSubCategory())
+                    .orElseThrow(() -> new ResourceNotFoundException("SubCategory", "idSubCategory", movementRequest.getIdSubCategory())));
+        } else {
+            movement.setSubCategory(null);
         }
 
-        SubCategory subCategory = subCategoryRepository.findById(movementRequest.getIdSubCategory())
-                .orElse(null);
-
-        if (subCategory == null) {
-            throw new ResourceNotFoundException("SubCategory", "idSubCategory", movementRequest.getIdSubCategory());
-        }
-        Movement movement = Movement.builder()
-                .account(account)
-                .type(movementRequest.getType())
-                .value(BigDecimal.valueOf(movementRequest.getValue()))
-                .dateMovement(movementRequest.getDateMovement())
-                .description(movementRequest.getDescription())
-                .category(category)
-                .subCategory(subCategory)
-                .user(movementRequest.getUser())
-                .build();
+        movement.setType(movementRequest.getType());
+        movement.setValue(BigDecimal.valueOf(movementRequest.getValue()));
+        movement.setDateMovement(movementRequest.getDateMovement());
+        movement.setDescription(movementRequest.getDescription());
+        movement.setUser(movementRequest.getUser());
+        movement.setTransferReference(movementRequest.getTransferReference());
 
         return movementRepository.save(movement);
     }
 
     @Override
     public Movement getMovementById(Integer idMovement) {
-        return null;
+        return movementRepository.findById(idMovement).orElse(null);
     }
 }

@@ -1,16 +1,21 @@
 package com.jn.api_gastos.modules.movement;
 
 import com.jn.api_gastos.config.exception.ResourceNotFoundException;
+import com.jn.api_gastos.modules.account.Account;
+import com.jn.api_gastos.modules.account.IAccountService;
+import com.jn.api_gastos.modules.category.Category;
+import com.jn.api_gastos.modules.category.CategoryService;
+import com.jn.api_gastos.modules.category.ICategoryService;
+import com.jn.api_gastos.modules.subcategory.ISubCategoryService;
+import com.jn.api_gastos.modules.subcategory.SubCategory;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
@@ -19,7 +24,7 @@ import java.util.List;
 public class MovementController {
 
     private static final String NAME_ENDPOINT = "/movement";
-    private static final String NAME_ENDPOINT_ID = "/movement/{id}";
+    private static final String NAME_ENDPOINT_ID = "/movement/{idMovement}";
 
     @Autowired
     private IMovementService movementService;
@@ -41,4 +46,12 @@ public class MovementController {
         return ResponseEntity.ok(saved);
     }
 
+    @PutMapping(value = NAME_ENDPOINT_ID)
+    public ResponseEntity<Movement> updateMovement(@PathVariable Integer idMovement, @Valid @RequestBody MovementRequestDTO requestDTO) {
+
+        requestDTO.setIdMovement(idMovement.longValue());
+        Movement updated = movementService.saveMovement(requestDTO);
+
+        return ResponseEntity.ok(updated);
+    }
 }
