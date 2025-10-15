@@ -11,7 +11,11 @@ public class ItemMonthlyPlanResponseDTO {
     private String description;
     private BigDecimal estimateAmount;
     private BigDecimal realAmount;
+    private Long categoryMonthlyPlanId;
+    private String categoryMonthlyPlanName;
+    private Long categoryId;
     private String categoryName;
+    private Long subCategoryId;
     private String subCategoryName;
     private boolean state;
 }

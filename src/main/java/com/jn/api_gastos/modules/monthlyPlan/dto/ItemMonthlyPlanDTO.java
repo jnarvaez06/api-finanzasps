@@ -18,6 +18,12 @@ public class ItemMonthlyPlanDTO {
     private BigDecimal realAmount;
 
     @NotNull
+    private Long monthlyPlan;
+
+    @NotNull
+    private Long categoryMonthlyPlanId;
+
+    @NotNull
     private Long categoryId;
 
     private Long subCategoryId; // Opcional

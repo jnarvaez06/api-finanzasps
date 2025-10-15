@@ -45,19 +45,11 @@ public class MonthlyPlanService {
             );
         });
 
-        // Obtener CategoryMonthlyPlan
-        CategoryMonthlyPlan categoryMonthlyPlan = categoryMonthlyPlanRepository
-                .findById(Math.toIntExact(requestDTO.getCategoryMonthlyPlanId()))
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "CategoryMonthlyPlan no encontrada con ID: " + requestDTO.getCategoryMonthlyPlanId()
-                ));
-
         // Crear MonthlyPlan
         MonthlyPlan monthlyPlan = MonthlyPlan.builder()
                 .year(requestDTO.getYear())
                 .month(requestDTO.getMonth())
                 .state(requestDTO.isState())
-                .categoryMonthlyPlan(categoryMonthlyPlan)
                 .user(requestDTO.getUser())
                 .build();
 
@@ -75,6 +67,13 @@ public class MonthlyPlanService {
     }
 
     private ItemMonthlyPlan createItemMonthlyPlan(ItemMonthlyPlanDTO itemDTO, MonthlyPlan monthlyPlan) {
+
+        // Obtener CategoryMonthlyPlan
+        CategoryMonthlyPlan categoryMonthlyPlan = categoryMonthlyPlanRepository.findById(Math.toIntExact(itemDTO.getCategoryMonthlyPlanId()))
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "CategoryMonthlyPlan no encontrada con ID: " + itemDTO.getCategoryMonthlyPlanId()
+                ));
+
         // Obtener Category
         Category category = categoryRepository.findById(Math.toIntExact(itemDTO.getCategoryId()))
                 .orElseThrow(() -> new IllegalArgumentException(
@@ -97,6 +96,7 @@ public class MonthlyPlanService {
                 .monthlyPlan(monthlyPlan)
                 .category(category)
                 .subCategory(subCategory)
+                .categoryMonthlyPlan(categoryMonthlyPlan)
                 .state(itemDTO.isState())
                 .user(monthlyPlan.getUser())
                 .build();
@@ -109,7 +109,11 @@ public class MonthlyPlanService {
                         .description(item.getDescription())
                         .estimateAmount(item.getEstimateAmount())
                         .realAmount(item.getRealAmount())
+                        .categoryMonthlyPlanId(item.getCategoryMonthlyPlan().getIdCategoryMonthlyPlan().longValue())
+                        .categoryMonthlyPlanName(item.getCategoryMonthlyPlan().getDescription())
+                        .categoryId(item.getCategory().getIdCategory().longValue())
                         .categoryName(item.getCategory().getDescription())
+                        .subCategoryId(item.getSubCategory() != null ? item.getSubCategory().getIdSubCategory().longValue() : null)
                         .subCategoryName(item.getSubCategory() != null ? item.getSubCategory().getDescription() : null)
                         .state(item.isState())
                         .build())
@@ -120,8 +124,6 @@ public class MonthlyPlanService {
                 .year(monthlyPlan.getYear())
                 .month(monthlyPlan.getMonth())
                 .state(monthlyPlan.isState())
-                .categoryMonthlyPlanId(monthlyPlan.getCategoryMonthlyPlan().getIdCategoryMonthlyPlan().longValue())
-                .categoryMonthlyPlanName(monthlyPlan.getCategoryMonthlyPlan().getDescription())
                 .user(monthlyPlan.getUser())
                 .items(itemsResponse)
                 .totalItems(itemsResponse.size())

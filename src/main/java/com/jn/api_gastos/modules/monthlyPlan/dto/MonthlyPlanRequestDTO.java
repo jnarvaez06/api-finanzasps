@@ -18,9 +18,6 @@ public class MonthlyPlanRequestDTO {
     @NotNull
     private boolean state;
 
-    @NotNull
-    private Long categoryMonthlyPlanId;
-
     @NotBlank
     @Email
     private String user;

@@ -11,8 +11,6 @@ public class MonthlyPlanResponseDTO {
     private Integer year;
     private Integer month;
     private boolean state;
-    private Long categoryMonthlyPlanId;
-    private String categoryMonthlyPlanName;
     private String user;
     private List<ItemMonthlyPlanResponseDTO> items;
     private Integer totalItems;

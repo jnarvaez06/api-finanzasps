@@ -1,6 +1,7 @@
 package com.jn.api_gastos.modules.monthlyPlan.model;
 
 import com.jn.api_gastos.modules.category.Category;
+import com.jn.api_gastos.modules.categoryMonthlyPlan.CategoryMonthlyPlan;
 import com.jn.api_gastos.modules.subcategory.SubCategory;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
@@ -37,13 +38,17 @@ public class ItemMonthlyPlan {
     private MonthlyPlan monthlyPlan;
 
     @NotNull
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "id_category", referencedColumnName = "idCategory")
     private Category category;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "id_subcategory", referencedColumnName = "idSubCategory")
     private SubCategory subCategory;
+
+    @OneToOne
+    @JoinColumn(name = "id_category_monthly_plan", referencedColumnName = "idCategoryMonthlyPlan")
+    private CategoryMonthlyPlan categoryMonthlyPlan;
 
     @NotNull
     private boolean state;

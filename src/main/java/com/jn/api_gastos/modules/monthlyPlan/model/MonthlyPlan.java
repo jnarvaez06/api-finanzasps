@@ -23,10 +23,6 @@ public class MonthlyPlan {
     private Integer month;
     @NotNull
     private boolean state;
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "id_category_monthly_plan", nullable = false)
-    private CategoryMonthlyPlan categoryMonthlyPlan;
     @NotBlank
     @Email
     private String user;
