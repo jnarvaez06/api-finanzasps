@@ -18,4 +18,5 @@ public class ItemMonthlyPlanResponseDTO {
     private Long subCategoryId;
     private String subCategoryName;
     private boolean state;
+    private boolean isRecurrent;
 }

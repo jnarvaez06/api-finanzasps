@@ -30,4 +30,7 @@ public class ItemMonthlyPlanDTO {
 
     @NotNull
     private boolean state;
+
+    @NotNull
+    private  boolean isRecurrent;
 }

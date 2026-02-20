@@ -53,6 +53,9 @@ public class ItemMonthlyPlan {
     @NotNull
     private boolean state;
 
+    @NotNull
+    private boolean isRecurrent;
+
     @NotBlank
     @Email
     private String user;
